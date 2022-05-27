@@ -8,6 +8,26 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
+    optionButton:{
+        width: 150,
+    },
+
+    optionView:{
+        position: "absolute",
+        top: 20,
+        marginVertical: 50,
+        alignItems:'center',
+        zIndex:1,
+        backgroundColor:'#fff',
+        padding: 15,
+        borderRadius:5,
+    },
+
+    buttonGroup:{
+        margin: 10,
+        flexDirection:"row",
+    },
+
     map: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
