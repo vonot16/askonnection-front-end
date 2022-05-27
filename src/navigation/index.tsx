@@ -4,7 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignIn } from '../screens/SignIn';
 import { Main } from '../screens/Main';
-import {Map as MapScreen} from '../screens/Map';
+import { Map as MapScreen } from '../screens/Map';
+import { TypeAccount } from '../screens/TypeAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,11 @@ export function Navigation() {
         <Stack.Screen options={{ headerShown: false }}
           name="SignIn"
           component={SignIn}
+        />
+
+        <Stack.Screen options={{ headerShown: false }}
+          name="Account"
+          component={TypeAccount}
         />
 
         <Stack.Screen options={{ headerShown: false }}

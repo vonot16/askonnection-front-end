@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from 'react-native-paper';
@@ -10,10 +10,14 @@ import Logo from '../../../assets/images/logo.png';
 
 export function SignIn() {
 
+    const accountExist = false
+
     const navigation=useNavigation<ProfileScreenNavigationProp>();
 
     async function handleSignIn() {
-        navigation.navigate('Main')
+        accountExist ?
+            navigation.navigate('Main')
+            : navigation.navigate('Account')
     }
 
     function changeStatusBarColor(){

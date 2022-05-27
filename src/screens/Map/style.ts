@@ -32,5 +32,11 @@ export const styles = StyleSheet.create({
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
     },
+
+    marker:{
+        width: 200,
+        height: 200,
+        borderRadius:400
+    }
     
 })
