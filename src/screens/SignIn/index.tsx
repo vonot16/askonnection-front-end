@@ -1,7 +1,12 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { Button } from 'react-native-paper';
+import { Image, Text, View } from 'react-native';
+
+import { styles } from './style';
+import Logo from '../../../assets/images/logo.png';
+
 
 export function SignIn() {
 
@@ -12,13 +17,11 @@ export function SignIn() {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <TouchableOpacity>
-                <Text>
-                    Login
-                </Text>
-            </TouchableOpacity>
-
+        <View style={styles.container}>
+            <Image source={Logo} style={styles.logoImage}/>
+            <Button icon="google" mode="contained" onPress={handleSignIn} style={styles.signInButton} labelStyle={styles.textButton}>
+                    Sign In
+            </Button>
         </View>
     )
 }

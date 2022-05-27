@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "askonnection-front-end",
-    "slug": "askonnection-front-end",
+    "name": "askonnection",
+    "slug": "askonnection",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
