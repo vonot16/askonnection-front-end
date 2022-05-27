@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignIn } from '../screens/SignIn';
 import { Main } from '../screens/Main';
+import {Map as MapScreen} from '../screens/Map';
 
 const Stack = createNativeStackNavigator();
 

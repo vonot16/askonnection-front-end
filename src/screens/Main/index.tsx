@@ -1,16 +1,41 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Text, View } from 'react-native';
+import { Map } from '../Map';
+import { Profile } from '../Profile';
 
-import { styles } from './style';
+export function Main() {
 
-export function Main(){
-    const navigation = useNavigation();
+    const Tab = createMaterialBottomTabNavigator();
 
     return (
-        <View style={styles.container}>
-            
-        </View>
+        <Tab.Navigator
+            initialRouteName="Map"
+            activeColor="#f0edf6"
+            inactiveColor="#3e2465"
+        >
+            <Tab.Screen
+                name="Map"
+                component={Map}
+                options={{
+                    tabBarLabel: "Ver Mapa",
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="google-maps" color="#fff" size={26} />
+                    ),
+                }}
+            />
+
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarLabel: "Perfil",
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="account" color="#fff" size={26} />
+                    ),
+                }}
+            />
+        </Tab.Navigator>
     )
 }
