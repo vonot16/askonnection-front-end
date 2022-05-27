@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from 'react-native-paper';
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 
 import { styles } from './style';
 import Logo from '../../../assets/images/logo.png';
@@ -10,10 +10,17 @@ import Logo from '../../../assets/images/logo.png';
 
 export function SignIn() {
 
-    const navigation = useNavigation();
+    type AuthResponse = {
+        type: string;
+        params: {
+          access_token: string;
+        }
+      }
+
+    const navigation =useNavigation<ProfileScreenNavigationProp>();
 
     async function handleSignIn() {
-        //navigation.navigate('');
+        navigation.navigate('Main')
     }
 
     return (

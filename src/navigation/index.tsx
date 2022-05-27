@@ -1,20 +1,27 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignIn } from '../screens/SignIn';
+import { Main } from '../screens/Main';
 
-const { Navigator, Screen } = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export function Navigation() {
   return (
     <NavigationContainer>
-      <Navigator>
-        <Screen options={{headerShown:false}}
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }}
           name="SignIn"
           component={SignIn}
         />
-      </Navigator>
+
+        <Stack.Screen options={{ headerShown: false }}
+          name="Main"
+          component={Main}
+        />
+
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
