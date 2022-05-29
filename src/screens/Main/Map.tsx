@@ -6,11 +6,11 @@ import MapView, {
     PROVIDER_GOOGLE,
     Region,
 } from "react-native-maps";
-import { View, Text, Linking, ScrollView } from 'react-native';
+import { View, Text, Linking } from 'react-native';
 import { styles } from './mapStyle';
-import { Avatar, Button, FAB, IconButton } from 'react-native-paper';
+import { Avatar, Button, IconButton } from 'react-native-paper';
 import { useRoute } from '@react-navigation/native';
-import { getAllInstallers, getAllPlans, getAllPlansFromDB, getAllUsers, getInstallerById, getInstallerPlans, getInstallerPlansFromBD, getPlanById, getUserById } from '../../API';
+import { getAllInstallers, getAllPlans, getAllUsers, getInstallerById, getInstallerPlans, getInstallerPlansFromBD, getPlanById, getUserById } from '../../API';
 
 export function Map() {
     const route = useRoute();
@@ -48,8 +48,6 @@ export function Map() {
     const [installerPhone, setInstallerPhone] = useState("")
     const [installerPlans, setInstallerPlans] = useState([String])
     const [avaliblePlans, setAvaliblePlans] = useState([{}] as [avaliblePlansSchema])
-    const [addPlan, setAddPlan] = useState(false)
-    const [allPlans, setAllPlans] = useState([{}] as [avaliblePlansSchema])
 
     const [usersData, setUsersData] = useState([{}] as [personalDataSchema])
     const [userPhone, setUserPhone] = useState("")
@@ -87,18 +85,11 @@ export function Map() {
         setInstallerPlans(await getInstallerPlansFromBD(installerId))
     }
 
-    async function getAllPlans() {
-        setAllPlans(await getAllPlansFromDB())
-    }
-
     useEffect(() => {
         getPersonalData()
         getPlansData()
         if (type === "User") getInstallersData()
-        else if (type === "Installer") {
-            getUsersData()
-            getAllPlans()
-        }
+        else if (type === "Installer") getUsersData()
     }, [])
 
     useEffect(() => {
@@ -115,6 +106,7 @@ export function Map() {
             installerPlans.map((planId) => {
                 getAvaliblePlans(planId)
             })
+
         }
     }, [installerPlans])
 
@@ -141,7 +133,7 @@ export function Map() {
                 </View>
 
                 {searchByPlans ?
-                    <ScrollView>
+                    <>
                         {installerId !== "" ?
                             avaliblePlans.map((plan, i) => (
                                 plan.isp === undefined ? <></> : <View>
@@ -158,7 +150,7 @@ export function Map() {
                             )
 
                             : <Text>All Plans</Text>}
-                    </ScrollView> :
+                    </> :
                     <>
                         <MapView
                             provider={PROVIDER_GOOGLE}
@@ -213,7 +205,7 @@ export function Map() {
             <View>
 
                 {searchByPlans ?
-                    <ScrollView>
+                    <View>
                         <Button icon="close" style={{ position: 'absolute', top: 50, right: 0 }}
                             onPress={() => {
                                 setSearchByPlans(false)
@@ -222,7 +214,7 @@ export function Map() {
                             }} />
                         {avaliblePlans.map((plan, i) => (
                             plan.isp === undefined ? <></> :
-                                <View style={{ alignSelf: 'center', position: 'absolute', top: 100 }}>
+                                <View style={{ alignSelf: 'center', position:'absolute', top:100 }}>
                                     <Text key={plan.isp + plan.download_speed + plan.price_per_month}>
                                         {plan.isp} - Download: {plan.download_speed} / Upload: {plan.upload_speed} - R$ {plan.price_per_month}</Text>
 
@@ -234,7 +226,7 @@ export function Map() {
                                 </View>
                         )
                         )}
-                    </ScrollView> : <MapView
+                    </View> : <MapView
                         provider={PROVIDER_GOOGLE}
                         style={styles.map}
                     >
@@ -278,9 +270,6 @@ export function Map() {
                         ))}
 
                     </MapView>
-
-
                 }
-                
             </View>)
 }
