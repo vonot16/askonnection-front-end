@@ -6,33 +6,36 @@ import { Image, StatusBar, View } from 'react-native';
 
 import { styles } from './style';
 import Logo from '../../../assets/images/logo.png';
+import { verifyEmailRegistred } from '../../API';
+import { getData, } from '../../API/authApi';
 
 
 export function SignIn() {
 
-    const accountExist = false
-
-    const navigation=useNavigation<ProfileScreenNavigationProp>();
+    const navigation = useNavigation<ProfileScreenNavigationProp>();
 
     async function handleSignIn() {
-        accountExist ?
-            navigation.navigate('Main')
-            : navigation.navigate('Account')
+        const userData = await getData()
+        const verifyEmail = await verifyEmailRegistred(userData.email)
+        if (verifyEmail.accountType === "User" || verifyEmail.accountType === "Installer")
+            navigation.navigate('Main', { _id: verifyEmail._id, type:verifyEmail.accountType })
+        else navigation.navigate('Register', { userData: userData })
+
     }
 
-    function changeStatusBarColor(){
+    function changeStatusBarColor() {
         StatusBar.setBackgroundColor('#4285F4')
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         changeStatusBarColor()
     })
 
     return (
         <View style={styles.container}>
-            <Image source={Logo} style={styles.logoImage}/>
+            <Image source={Logo} style={styles.logoImage} />
             <Button icon="google" mode="contained" onPress={handleSignIn} style={styles.signInButton} labelStyle={styles.textButton}>
-                    Sign In
+                Sign In
             </Button>
         </View>
     )

@@ -3,9 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignIn } from '../screens/SignIn';
+import { Register } from '../screens/Register';
 import { Main } from '../screens/Main';
-import { Map as MapScreen } from '../screens/Map';
-import { TypeAccount } from '../screens/TypeAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,15 +18,14 @@ export function Navigation() {
         />
 
         <Stack.Screen options={{ headerShown: false }}
-          name="Account"
-          component={TypeAccount}
+          name="Register"
+          component={Register}
         />
 
         <Stack.Screen options={{ headerShown: false }}
           name="Main"
           component={Main}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   )
